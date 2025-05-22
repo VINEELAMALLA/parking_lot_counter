@@ -5,8 +5,7 @@ import numpy as np
 import tempfile
 from pathlib import Path
 from ultralytics import YOLO
-import torch
-import ultralytics.nn.tasks
+import os
 
 # === Streamlit App Config ===
 st.set_page_config(page_title="Parking Slot Occupancy Detection", layout="wide")
@@ -14,18 +13,17 @@ st.title("🚗 Parking Slot Occupancy Detection")
 st.write("➡️ Upload an image with **less than 50 parking slots** for better accuracy.")
 
 # === Constants and Paths ===
-MODEL_PATH = "weights/best.pt"
+MODEL_PATH = str(Path(__file__).parent / "weights" / "best.pt")
 
 # === Check if Model Exists ===
 if not Path(MODEL_PATH).exists():
-    st.error("❌ YOLO model not found at 'weights/best.pt'. Please ensure the model is included in the deployment.")
+    st.error(f"❌ Model file not found at {MODEL_PATH}. Current directory: {os.getcwd()}. Files in weights/: {os.listdir('weights') if os.path.exists('weights') else 'No weights directory'}")
     st.stop()
 
 # === Load Model ===
 try:
-    # Allow ultralytics.nn.tasks.DetectionModel for safe loading
-    torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])
     model = YOLO(MODEL_PATH)
+    st.success("✅ YOLO model loaded successfully")
 except Exception as e:
     st.error(f"❌ Failed to load YOLO model: {str(e)}")
     st.stop()
