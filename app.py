@@ -13,11 +13,11 @@ st.title("🚗 Parking Slot Occupancy Detection")
 st.write("➡️ Upload an image with **less than 50 parking slots** for better accuracy.")
 
 # === Constants and Paths ===
-MODEL_PATH = str(Path(__file__).parent / "weights" / "best.pt")
+MODEL_PATH = "weights/best.pt"  # ✅ Updated path for Streamlit Cloud compatibility
 
 # === Check if Model Exists ===
 if not Path(MODEL_PATH).exists():
-    st.error(f"❌ Model file not found at {MODEL_PATH}. Current directory: {os.getcwd()}. Files in weights/: {os.listdir('weights') if os.path.exists('weights') else 'No weights directory'}")
+    st.error(f"❌ Model file not found at {MODEL_PATH}. Files in weights/: {os.listdir('weights') if os.path.exists('weights') else 'No weights directory'}")
     st.stop()
 
 # === Load Model ===
