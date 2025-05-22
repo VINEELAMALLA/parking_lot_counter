@@ -30,10 +30,10 @@ except Exception as e:
 
 # === Default Images ===
 default_images = {
-    "Default 1": "images/P2.png",
-    "Default 2": "images/Screenshot 2025-05-22 161130.png",
-    "Default 3": "images/13.png",
-    "Default 4": "images/26.png",
+    "Default Image-1": "images/P2.png",
+    "Default Image-2": "images/Screenshot 2025-05-22 161130.png",
+    "Default Image-3": "images/13.png",
+    "Default Image-4": "images/26.png",
 }
 
 st.write("### 🖼 Default Images")
@@ -48,7 +48,6 @@ for i, (label, path) in enumerate(default_images.items()):
                 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 st.write(f"**{label}**")
                 st.image(img_rgb)
-
             else:
                 st.error(f"❌ Failed to load image: {path}")
         else:
@@ -91,7 +90,7 @@ if image_path:
 
             if boxes is None or len(boxes) == 0:
                 st.warning("⚠️ No parking slots detected.")
-                st.image(img_rgb, caption="Input Image (No Detections)", use_container_width=True)
+                st.image(img_rgb, caption="Input Image (No Detections)")
             else:
                 classes = boxes.cls.cpu().numpy().astype(int)
                 confidences = boxes.conf.cpu().numpy()
@@ -104,7 +103,7 @@ if image_path:
 
                 if len(classes) == 0:
                     st.warning("⚠️ All detections were low confidence (< 0.3).")
-                    st.image(img_rgb, caption="No valid detections", use_container_width=True)
+                    st.image(img_rgb, caption="No valid detections")
                 else:
                     img_display = cv2.resize(img, (640, 640))
                     for box, cls, conf in zip(coordinates, classes, confidences):
@@ -114,7 +113,7 @@ if image_path:
                         cv2.rectangle(img_display, (x1, y1), (x2, y2), color, 2)
                         cv2.putText(img_display, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
-                    st.image(cv2.cvtColor(img_display, cv2.COLOR_BGR2RGB), caption="🟢 Detection Results", use_container_width=True)
+                    st.image(cv2.cvtColor(img_display, cv2.COLOR_BGR2RGB), caption="🟢 Detection Results")
 
                     df = pd.DataFrame({
                         "slot_id": range(1, len(classes) + 1),
