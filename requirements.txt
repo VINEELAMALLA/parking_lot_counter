@@ -1,10 +1,6 @@
 streamlit
-ultralytics==8.0.152
-torch
-pillow
-pandas
-streamlit
-ultralytics
+ultralytics==8.0.20
 opencv-python-headless
-pandas
+Pillow
 numpy
+pandas
