@@ -9,7 +9,7 @@ import gdown
 
 st.set_page_config(page_title="Parking Slot Occupancy Detection", layout="wide")
 
-# === Step 1: Download the YOLO model from Google Drive if not present ===
+# === Step 1: Download the YOLO model from Google Drive if not present or if corrupted ===
 MODEL_PATH = "weights/best.pt"
 Path("weights").mkdir(exist_ok=True)
 
@@ -17,19 +17,26 @@ Path("weights").mkdir(exist_ok=True)
 FILE_ID = "10hSLU7_fpGhSQMdV7eK7TJKdNUVHBJ0G"
 DRIVE_URL = f"https://drive.google.com/uc?id={FILE_ID}"
 
-if not os.path.exists(MODEL_PATH):
+def download_model():
     with st.spinner("Downloading YOLO model..."):
         gdown.download(DRIVE_URL, MODEL_PATH, quiet=False)
 
-# === Step 2: Load the model safely ===
+# Try to load the model safely
 try:
     from ultralytics import YOLO
     model = YOLO(MODEL_PATH)
 except Exception as e:
-    st.error("❌ Failed to load YOLO model. Please check the model file.")
-    st.stop()
+    st.warning("⚠️ Model appears corrupted. Attempting to re-download...")
+    if os.path.exists(MODEL_PATH):
+        os.remove(MODEL_PATH)
+    download_model()
+    try:
+        model = YOLO(MODEL_PATH)
+    except Exception as e2:
+        st.error("❌ Failed to load YOLO model even after re-downloading. Please check your Google Drive file.")
+        st.stop()
 
-# === Step 3: Default image paths ===
+# === Step 2: Default image paths ===
 default_image_1_path = "images/P2.png"
 default_image_2_path = "images/Screenshot 2025-05-22 161130.png"
 default_image_3_path = "images/13.png"
@@ -38,7 +45,7 @@ default_image_4_path = "images/26.png"
 st.title("🚗 Parking Slot Occupancy Detection")
 st.write("➡️ Upload an image with **< 50 parking slots** for better accuracy.")
 
-# === Step 4: Show preview of default images ===
+# === Step 3: Show preview of default images ===
 st.write("### 🖼 Default Images")
 col1, col2, col3, col4 = st.columns(4)
 
@@ -57,17 +64,17 @@ show_image_column(col2, default_image_2_path, "Default 2", "Angled view (fewer s
 show_image_column(col3, default_image_3_path, "Default 3", "Aerial view (fewer slots)")
 show_image_column(col4, default_image_4_path, "Default 4", "Aerial view (fewer slots)")
 
-# === Step 5: Buttons for default image selection ===
+# === Step 4: Buttons for default image selection ===
 col1, col2, col3, col4 = st.columns(4)
 use_default_1 = col1.button("Use Default Image 1")
 use_default_2 = col2.button("Use Default Image 2")
 use_default_3 = col3.button("Use Default Image 3")
 use_default_4 = col4.button("Use Default Image 4")
 
-# === Step 6: Upload custom image ===
+# === Step 5: Upload custom image ===
 uploaded_file = st.file_uploader("📤 Upload a parking lot image", type=["jpg", "jpeg", "png"])
 
-# === Step 7: Decide which image to use ===
+# === Step 6: Decide which image to use ===
 image_path = None
 if sum([use_default_1, use_default_2, use_default_3, use_default_4, uploaded_file is not None]) > 1:
     st.warning("⚠️ Please choose only one input: a default image OR a new upload.")
@@ -89,7 +96,7 @@ elif uploaded_file is not None:
         image_path = tfile.name
     st.info("✅ Using uploaded image.")
 
-# === Step 8: Run Detection ===
+# === Step 7: Run Detection ===
 if image_path:
     img = cv2.imread(image_path)
     if img is None:
