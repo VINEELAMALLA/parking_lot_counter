@@ -5,6 +5,8 @@ import numpy as np
 import tempfile
 from pathlib import Path
 from ultralytics import YOLO
+import torch
+import ultralytics.nn.tasks
 
 # === Streamlit App Config ===
 st.set_page_config(page_title="Parking Slot Occupancy Detection", layout="wide")
@@ -21,6 +23,8 @@ if not Path(MODEL_PATH).exists():
 
 # === Load Model ===
 try:
+    # Allow ultralytics.nn.tasks.DetectionModel for safe loading
+    torch.serialization.add_safe_globals([ultralytics.nn.tasks.DetectionModel])
     model = YOLO(MODEL_PATH)
 except Exception as e:
     st.error(f"❌ Failed to load YOLO model: {str(e)}")
