@@ -1,0 +1,8 @@
+path: C:/Users/vinee/OneDrive/parking_space/PKLot_dataset  # update to match your full path
+train: train
+val: val
+test: test
+
+names:
+  0: free
+  1: occupied
