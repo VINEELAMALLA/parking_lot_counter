@@ -1,0 +1,7 @@
+# data.yaml for YOLOv8 parking space detection
+
+nc: 2
+names: ['free_parking_space', 'not_free_parking_space']
+
+train: images/train
+val: images/val

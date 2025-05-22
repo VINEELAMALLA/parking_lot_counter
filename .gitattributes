@@ -1,0 +1,6 @@
+PKLot_dataset/train/_annotations.coco.json filter=lfs diff=lfs merge=lfs -text
+archive1.zip filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+PKLot_dataset/*/*.json filter=lfs diff=lfs merge=lfs -text
+archive.zip filter=lfs diff=lfs merge=lfs -text
+achive1.zip filter=lfs diff=lfs merge=lfs -text

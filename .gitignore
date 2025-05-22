@@ -1,0 +1,20 @@
+# Ignore YOLO model weights (large files)
+runs/detect/train5/weights/best.pt
+
+# Ignore default images (if they are large or you don’t want to upload them)
+P2.png
+Screenshot 2025-05-22 161130.png
+images/13.png
+images/26.png
+
+# Ignore temporary files
+*.jpg
+*.tmp
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore virtual environments (if any)
+venv/
+env/
