@@ -3,3 +3,8 @@ ultralytics==8.0.152
 torch
 pillow
 pandas
+streamlit
+ultralytics
+opencv-python-headless
+pandas
+numpy
