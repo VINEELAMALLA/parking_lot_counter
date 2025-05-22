@@ -7,13 +7,13 @@ import tempfile
 import os
 
 # Load your trained YOLOv8 model
-model_path = r"C:/Users/vinee/OneDrive/parking_space/runs/detect/train5/weights/best.pt"
+model_path = r"weights/best.pt"
 
 # Paths to the default input images
-default_image_1_path = r"C:/Users/vinee/OneDrive/parking_space/P2.png"  # First image (aerial view, 129 slots)
-default_image_2_path = r"C:\Users\vinee\OneDrive\parking_space\Screenshot 2025-05-22 161130.png"  # Second image (angled view, fewer slots)
-default_image_3_path = r"C:\Users\vinee\OneDrive\parking_space\images\13.png"  # Third image (newly added)
-default_image_4_path = r"C:\Users\vinee\OneDrive\parking_space\images\26.png"  # Fourth image (newly added)
+default_image_1_path = r"images/P2.png"  # First image (aerial view, 129 slots)
+default_image_2_path = r"images/Screenshot 2025-05-22 161130.png"  # Second image (angled view, fewer slots)
+default_image_3_path = r"images/13.png"  # Third image (newly added)
+default_image_4_path = r"images/26.png"  # Fourth image (newly added)
 
 # Verify model file exists
 if not os.path.exists(model_path):
