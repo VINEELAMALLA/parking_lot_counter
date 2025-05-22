@@ -47,7 +47,8 @@ for i, (label, path) in enumerate(default_images.items()):
             if img is not None:
                 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 st.write(f"**{label}**")
-                st.image(img_rgb, use_container_width=True)
+                st.image(img_rgb)
+
             else:
                 st.error(f"❌ Failed to load image: {path}")
         else:
