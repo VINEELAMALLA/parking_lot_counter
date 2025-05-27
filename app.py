@@ -10,7 +10,7 @@ import os
 # === Streamlit App Config ===
 st.set_page_config(page_title="Parking Slot Occupancy Detection", layout="wide")
 st.title("🚗 Parking Slot Occupancy Detection")
-st.write("➡️ Upload an image with **less than 50 parking slots** for better accuracy.")
+st.write("➡️ Upload an image with **less than 100 parking slots** for better accuracy.")
 
 # === Constants and Paths ===
 MODEL_PATH = "weights/best.pt"  # ✅ Updated path for Streamlit Cloud compatibility
@@ -30,10 +30,10 @@ except Exception as e:
 
 # === Default Images ===
 default_images = {
-    "Default Image-1": "images/P2.png",
-    "Default Image-2": "images/Screenshot 2025-05-22 161130.png",
+    "Default Image-1": "images/26.png",
+    "Default Image-2": "images/P2.png",
     "Default Image-3": "images/13.png",
-    "Default Image-4": "images/26.png",
+    "Default Image-4": "images/Screenshot 2025-05-22 161130.png",
 }
 
 st.write("### 🖼 Default Images")
