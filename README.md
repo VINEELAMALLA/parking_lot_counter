@@ -1,5 +1,5 @@
 # parking_lot_counter
-🔗 Live Demo: https://lnkd.in/e_tgDg_X
+🔗 Live Demo: https://vineelamalla-parking-lot-counter-app-c4mzmg.streamlit.app/
  project — a smart parking space detection web application built using Streamlit, Using computer vision and deep learning techniques.
 🔍 Project Overview:
  This application automatically detects "occupied" and "available" parking spaces from image using real-time object detection model YOLOv8. Intended to support efficient parking space allocation and facilitate user convenience in crowded urban locations.
