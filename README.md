@@ -4,7 +4,7 @@
 
 ## 📌 Overview
 
-This project detects available parking spaces using computer vision techniques and deep learning. It processes real-time images to classify parking slots as occupied or vacant.
+This project detects available parking spaces using computer vision techniques and deep learning. It processes real-time images to classify parking slots as occupied or vacant. Also compared the performance, runtime,accuracy,hardware usage of yolo11n.pt vs yolov8m.pt vs yolov8n.pt
 
 ## 🚀 Features
 
